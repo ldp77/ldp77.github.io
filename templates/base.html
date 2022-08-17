@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
+
+    <style>
+
+        body {
+            font-family: rubik;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: inline-block;
+            text-align: left;
+        }
+        li {
+            float: left;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 0px 0px;
+            text-decoration: none;
+        }
+        
+
+    </style>
+</head>
+<body>
+    
+    <ul>
+        <li style="font-family: impact; font-size: 36px; color: white; width: 100%; text-align: center;">
+            MODELING CALCULATOR
+        </li>
+    </ul>
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

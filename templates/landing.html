@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .main-content {
+        margin: auto;
+        margin-top: 30px;
+        padding-left: 50px;
+        padding-right: 50px;
+        text-align: center;
+    }
+
+    .learner-section {
+        margin: auto;
+        margin-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .interface-btn {
+        width: 80%;
+        margin: auto;
+        border: 0px;
+        height: 50px;
+        background-color: #1bbade;
+        font-family: rubik;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .interface-btn:hover {
+        background-color: #04aa6d;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+    }
+    
+
+</style>
+
+<script>
+    function showDataInput(id) {
+        document.getElementById(id).style.visibility = "visible"
+        document.getElementById(id).style.height = "150px"
+        document.getElementById(id).style.paddingTop = "30px"
+    }
+
+    function saveAndClose(id) {
+        document.getElementById(id).style.visibility = "hidden"
+        document.getElementById(id).style.height = "0px"
+        document.getElementById(id).style.paddingTop = "0px"
+    }
+
+</script>
+
+<div class="main-content">
+    <div class="learner-section" style="padding-top: 50px;">
+        <div style="width: 50%; float: left;">
+            <button class="interface-btn" onClick="showDataInput('data-entry-div')">
+                Insert Data
+            </button>
+        </div>
+        <div style="width: 50%; float: left;">
+            <button class="interface-btn" onClick="showDataInput('query-div')">
+                Query
+            </button>
+        </div>
+    </div>
+</div>
+<div id="data-entry-div" class="main-content" style="visibility: hidden; height: 0px; margin-top: 0px">
+    <form action="/generate/", method="post">
+        <textarea name="data-entry-box", id="data-entry-box" type="text"></textarea>
+        <button class="interface-btn" style="width: 50%" onClick="saveAndClose('data-entry-div')">
+            Generate Models
+        </button>
+    </form>
+</div>
+<div id="query-div" class="main-content" style="visibility: hidden; height: 0px; margin-top: 0px">
+    <form action="/query/", method="post">
+        <textarea name="query-box", id="query-box" type="text"></textarea>
+        <button class="interface-btn" style="width: 50%" onClick="saveAndClose('query-div')">
+            Generate Predictions
+        </button>
+    </form>
+</div>
+<div class="main-content" style="padding-top: 50px;">
+    <hr style="color: black;">
+</div>
+<div class="main-content">
+    <div class="learner-section">
+        <h2>Linear Regression</h2>
+    </div>
+</div>
+<div class="main-content">
+    <div style="width: 50%; float: left">
+        (No Parameters)
+    </div>
+    <div style="width: 50%; float: left">
+        {% if results|length > 0 %}
+            {% for i in range(results[0]|length) %}
+                {% if i < 5 %}
+                <div style="display: block;">
+                    {{results[0][i]}}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="main-content" style="padding-top: 50px;">
+    <hr style="color: black;">
+</div>
+<div class="main-content">
+    <div class="learner-section">
+        <h2>Decision Tree</h2>
+    </div>
+</div>
+<div class="main-content">
+    <div style="width: 50%; float: left">
+        Leaf Size: 3
+    </div>
+    <div style="width: 50%; float: left">
+        {% if results|length > 0 %}
+            {% for i in range(results[1]|length) %}
+                {% if i < 5 %}
+                <div style="display: block;">
+                    {{results[1][i]}}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="main-content" style="padding-top: 50px;">
+    <hr style="color: black;">
+</div>
+<div class="main-content">
+    <div class="learner-section">
+        <h2>Bag Learner</h2>
+    </div>
+</div>
+<div class="main-content">
+    <div style="width: 50%; float: left;">
+        <div style="display: block;">Learner: Random Tree</div>
+        <div style="display: block;">Bags: 20</div>
+    </div>
+    <div style="width: 50%; float: left">
+        {% if results|length > 0 %}
+            {% for i in range(results[2]|length) %}
+                {% if i < 5 %}
+                <div style="display: block;">
+                    {{results[2][i]}}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="main-content" style="padding-top: 50px;">
+    <hr style="color: black;">
+</div>
+{% endblock content %}
